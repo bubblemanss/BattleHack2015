@@ -1,5 +1,4 @@
 var array = [];  
-var objArray = [];
 var parser = require('./parseHandler');
 var safety, economic, transportation;
 var neighbourhoodID=1;
