@@ -4,6 +4,7 @@ var markers = [];
 var infowindow = new google.maps.InfoWindow();
 var previousFeature = 0;
 var hoodColor = 'gray';
+var detailData, detailLocation;
 
 function initialize() {
     var mapOptions = {
@@ -50,11 +51,56 @@ function initialize() {
     }
 }
 
-function generateContent(data) {
+function showLess(){
+        infowindow.close();
+        infowindow = new google.maps.InfoWindow({
+            map: map,
+            position: detailLocation,
+            content: generateInitialContent(detailData)
+        });
+        infowindow.open(map);
+}
+
+function generateInitialContent(data) {
+    content = data.neighbourhood + "<br/>"
+            + "Annual Crimes: " + data.total_crime + "<br/>"
+            + "Home Prices: $" + data.home_prices +  "<br/>"+
+            '<a id="myLink" href="#" onclick="showDetails();">Details...</a>';
+    return content;
+}
+
+function generateDetailedContent(data) {
     content = data.neighbourhood + "<br/>"
             + "Annual crimes: " + data.total_crime + "<br/>"
-            + "Home prices: $" + data.home_prices;
+            + "Arsons: " + data.arsons + "<br/>"
+            + "Assaults: " + data.assaults +  "<br/>"
+            + "Break and Enters: " + data.break_enter + "<br/>"
+            + "Drug Arrest: " + data.drug_arrest +  "<br/>"
+            + "Hazardous Incidents: " + data.hazardous_incidents + "<br/>"
+            + "Murders: " + data.murders +  "<br/>"
+            + "Robberies: " + data.robberies + "<br/>"
+            + "Sexual Assaults: " + data.sexual_assaults + "<br/>"
+            + "Thefts: " + data.thefts +  "<br/>"
+            + "Vechile Thefts: " + data.vechile_thefts + "<br/>"
+            + "Number of TTC stops: " + data.ttc_stops + "<br/>"
+            + "Traffic Collision: " + data.traffic_collision + "<br/>"
+            + "Other Collisions: " + data.other_collision + "<br/>"
+            + "Businesses: " + data.businesses + "<br/>"
+            + "Child Care Space: " + data.child_care_space +  "<br/>"
+            + "Home Prices: " + data.home_prices + "<br/>"
+            + "Local Employment: " + data.local_employment + "<br/>"
+            +'<a id="myLink" href="#" onclick="showLess();">Show Less...</a>';
     return content;
+}
+
+function showDetails(){
+        infowindow.close();
+        infowindow = new google.maps.InfoWindow({
+            map: map,
+            position: detailLocation,
+            content: generateDetailedContent(detailData)
+        });
+        infowindow.open(map);
 }
 
 function serverLookup(hoodId, event) {
@@ -77,8 +123,10 @@ function serverLookup(hoodId, event) {
         contentType: "application/json"
     }).done(
         function(data){
+            detailData = data;
             var location = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
-            console.log(data);
+            detailLocation = location;
+            console.log("this is the data : " + data);
             hoodColor = (data.total_crime < 300) ? 'green' : (data.total_crime < 700) ? 'yellow' : 'red';
             if (previousFeature != 0) {
                 previousFeature.setProperty('isColorful', false);
@@ -89,7 +137,7 @@ function serverLookup(hoodId, event) {
             infowindow = new google.maps.InfoWindow({
                 map: map,
                 position: location,
-                content: generateContent(data)
+                content: generateInitialContent(data)
             });
             infowindow.open(map);
         }
