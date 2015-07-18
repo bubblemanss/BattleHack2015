@@ -1,6 +1,7 @@
 var map;
 var pos;
 var markers = [];
+var infowindow = new google.maps.InfoWindow();
 
 function initialize() {
     var mapOptions = {
@@ -11,6 +12,31 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
     map.data.loadGeoJson("simple.geojson");
+    map.data.setStyle(function(feature) {
+        var color = 'gray';
+        if (feature.getProperty('isColorful')) {
+          color = feature.getProperty('color');
+        }
+        return /** @type {google.maps.Data.StyleOptions} */({
+          fillColor: color,
+          strokeColor: color,
+          strokeWeight: 2
+        });
+    });
+
+    map.data.addListener('click', function(event) {
+        var location = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+
+        infowindow.close();
+        infowindow = new google.maps.InfoWindow({
+            map: map,
+            position: location,
+            content: "TEST"
+        });
+        infowindow.open(map);
+
+        event.feature.setProperty('isColorful', true);
+    });
 
     // Try HTML5 geolocation
     if(navigator.geolocation) {
@@ -33,56 +59,21 @@ function initialize() {
     }
 }
 
-function contentFormat(body){
-    var type = "Type: "+body.type+"<br/>";
-    var building = "Building: "+body.building+"<br/>";
-    var room = "Room #: "+body.room+"<br/>";
-    var code = "Code: "+body.code+"<br/>";
-    var people = "# of people: "+body.people+"<br/>";
+function displayInfoWindow(event) {
+    if (event.feature == undefined) return;
+    //var infowindow = {};
+    console.log("Display info window");
+    var lat = event.latLng;
+    var location = new google.maps.LatLng(lat);
 
-    return type+building+room+code+people;
+    infowindow.map = map;
+    infowindow.position = position;
+    infowindow.content = "Test";
+    infowindow.open(map);
+    event.feature.setProperty('isColorful', true);
 }
 
-function addMarker(data) {
-    var location = new google.maps.LatLng(data.latitude, data.longitude);
-
-    var marker = new google.maps.Marker({
-        position: location,
-        map: map
-    });
-    markers.push(marker);
-    map.panTo(location);
-
-    var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: location,
-        content: contentFormat(data)
-    });
-    infowindow.open(map, marker);
-}
-
-// Sets the map on all markers in the array.
-function setAllMap(map) {
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-    }
-}
-
-// Removes the markers from the map, but keeps them in the array.
-function clearMarkers() {
-    setAllMap(null);
-}
-
-// Shows any markers currently in the array.
-function showMarkers() {
-    setAllMap(map);
-}
-
-// Deletes all markers in the array by removing references to them.
-function deleteMarkers() {
-    clearMarkers();
-    markers = [];
-}
+/*
 
 function serverLookup(event){
     //var url = "http://localhost:8080/lookup";
@@ -170,5 +161,5 @@ function handleNoGeolocation(errorFlag) {
     var infowindow = new google.maps.InfoWindow(options);
     map.setCenter(options.position);
 }
-
+*/
 google.maps.event.addDomListener(window, 'load', initialize);
