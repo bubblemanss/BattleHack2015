@@ -10,8 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.13.1",
-    "express": "^4.13.0",
-    "uwapi": "^1.1.1"
+    "express": "^4.13.0"
   },
   "scripts": {
     "start": "node app.js"
