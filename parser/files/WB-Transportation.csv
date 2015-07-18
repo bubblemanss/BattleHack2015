@@ -1,0 +1,141 @@
+Neighbourhood,Neighbourhood Id,TTC Stops,TTC Overcrowded Routes,Pedestrian/Other Collisions,Traffic Collisions,Road Kilometres,Road Volume
+West Humber-Clairville,1,338,2011 data not available,727,778,165.0073788,5956.638889
+Mount Olive-Silverstone-Jamestown,2,70,2011 data not available,224,154,33.86731754,3514.166667
+Thistletown-Beaumond Heights,3,45,2011 data not available,109,69,27.87682004,3545
+Rexdale-Kipling,4,40,2011 data not available,62,96,25.23712912,7621.333333
+Elms-Old Rexdale,5,29,2011 data not available,63,70,17.07821088,4115.5
+Kingsview Village-The Westway,6,70,2011 data not available,105,74,34.67941211,3371
+Willowridge-Martingrove-Richview,7,81,2011 data not available,80,179,58.1905001,2446.833333
+Humber Heights-Westmount,8,58,2011 data not available,27,54,25.33142639,7039
+Edenbridge-Humber Valley,9,63,2011 data not available,39,150,44.71755334,4880.25
+Princess-Rosethorn,10,61,2011 data not available,49,78,55.51501804,4781
+Eringate-Centennial-West Deane,11,85,2011 data not available,74,166,63.07531488,6543.222222
+Markland Wood,12,29,2011 data not available,53,76,27.72983914,4689.333333
+Etobicoke West Mall,13,27,2011 data not available,33,31,15.67267236,3598
+Islington-City Centre West,14,245,2011 data not available,689,366,120.1567608,5704.939394
+Kingsway South,15,33,2011 data not available,56,99,30.48819635,5078.333333
+Stonegate-Queensway,16,106,2011 data not available,155,265,84.63624626,7115.142857
+Mimico,17,126,2011 data not available,134,171,52.8735019,4599.75
+New Toronto,18,41,2011 data not available,71,109,27.90971541,4541.75
+Long Branch,19,21,2011 data not available,43,88,26.22108051,2514.5
+Alderwood,20,60,2011 data not available,56,125,43.87582539,4381
+Humber Summit,21,103,2011 data not available,205,286,48.83422843,4400.090909
+Humbermede,22,46,2011 data not available,158,103,28.13528583,4377.333333
+Pelmo Park-Humberlea,23,47,2011 data not available,173,110,32.44376816,5889.857143
+Black Creek,24,94,2011 data not available,182,135,23.51819455,7326.3
+Glenfield-Jane Heights,25,88,2011 data not available,340,222,41.62227043,3632.714286
+Downsview-Roding-CFB,26,166,2011 data not available,604,300,87.98992412,2825.888889
+York University Heights,27,235,2011 data not available,598,548,67.60074578,5546.25
+Rustic,28,30,2011 data not available,36,99,20.02981099,7692
+Maple Leaf,29,26,2011 data not available,41,76,23.05914766,3384.666667
+Brookhaven-Amesbury,30,57,2011 data not available,188,108,29.67583066,4326.375
+Yorkdale-Glen Park,31,155,2011 data not available,1007,246,49.71453259,4193.75
+Englemount-Lawrence,32,90,2011 data not available,185,198,39.79200011,3056.1
+Clanton Park,33,57,2011 data not available,234,148,42.6697449,3513.25
+Bathurst Manor,34,69,2011 data not available,146,177,41.4372944,5594.4
+Westminster-Branson,35,36,2011 data not available,221,150,23.39752438,4357.75
+Newtonbrook West,36,95,2011 data not available,351,260,46.89685527,5774.6
+Willowdale West,37,25,2011 data not available,111,167,32.29755967,4808.285714
+Lansing-Westgate,38,44,2011 data not available,142,173,39.31779631,6920.090909
+Bedford Park-Nortown,39,75,2011 data not available,167,258,62.50510549,3124.076923
+St.Andrew-Windfields,40,151,2011 data not available,123,302,59.74934713,3595.5
+Bridle Path-Sunnybrook-York Mills,41,66,2011 data not available,205,128,48.36508558,7224.5
+Banbury-Don Mills,42,128,2011 data not available,319,166,75.0681627,4750.642857
+Victoria Village,43,73,2011 data not available,113,122,34.27607748,5074.666667
+Flemingdon Park,44,48,2011 data not available,95,120,11.77007859,5799.375
+Parkwoods-Donalda,45,109,2011 data not available,173,312,58.27994577,4192.777778
+Pleasant View,46,43,2011 data not available,77,152,32.86586301,4517
+Don Valley Village,47,57,2011 data not available,251,185,39.98616921,6050.3
+Hillcrest Village,48,80,2011 data not available,170,174,41.08455447,3566.222222
+Bayview Woods-Steeles,49,37,2011 data not available,79,107,29.92753678,10812
+Newtonbrook East,50,96,2011 data not available,145,151,39.49436862,4012.333333
+Willowdale East,51,61,2011 data not available,296,524,62.46088057,5919.692308
+Bayview Village,52,43,2011 data not available,302,99,37.07799855,3854.625
+Henry Farm,53,27,2011 data not available,112,108,16.06263543,5659
+O'Connor-Parkview,54,95,2011 data not available,93,128,44.29355774,2532.076923
+Thorncliffe Park,55,62,2011 data not available,256,154,13.29149971,6611.5
+Leaside-Bennington,56,62,2011 data not available,92,280,48.30630623,8701.583333
+Broadview North,57,44,2011 data not available,51,47,15.20816339,3892
+Old East York,58,74,2011 data not available,60,60,23.84081641,0
+Danforth-East York,59,53,2011 data not available,67,106,35.28021008,3039.75
+Woodbine-Lumsden,60,39,2011 data not available,27,70,16.07900302,2022.25
+Taylor-Massey,61,27,2011 data not available,73,89,10.68841484,3575.5
+East End-Danforth,62,89,2011 data not available,129,129,31.17002467,0
+The Beaches,63,44,2011 data not available,131,193,43.72176959,3434.25
+Woodbine Corridor,64,35,2011 data not available,57,75,20.75984929,5104
+Greenwood-Coxwell,65,44,2011 data not available,90,91,23.60064249,2621.5
+Danforth,66,53,2011 data not available,48,92,15.45133445,0
+Playter Estates-Danforth,67,41,2011 data not available,56,112,11.62757371,2725.333333
+North Riverdale,68,43,2011 data not available,95,110,18.77734793,3522.333333
+Blake-Jones,69,11,2011 data not available,49,40,11.66190741,0
+South Riverdale,70,109,2011 data not available,318,366,56.66203282,7386.2
+Cabbagetown-South St.James Town,71,26,2011 data not available,90,74,15.27421978,1741
+Regent Park,72,20,2011 data not available,40,15,6.939176645,0
+Moss Park,73,71,2011 data not available,211,59,23.8997873,7509.333333
+North St.James Town,74,19,2011 data not available,49,46,4.720277312,2377.666667
+Church-Yonge Corridor,75,64,2011 data not available,357,253,22.58273038,4183.727273
+Bay Street Corridor,76,126,2011 data not available,580,290,26.29975736,4701.1
+Waterfront Communities-The Island,77,90,2011 data not available,610,487,63.67921613,5771.68
+Kensington-Chinatown,78,49,2011 data not available,236,289,21.2281364,4152.777778
+University,79,45,2011 data not available,152,86,15.59120246,0
+Palmerston-Little Italy,80,40,2011 data not available,148,95,18.86810933,2291.666667
+Trinity-Bellwoods,81,41,2011 data not available,208,156,26.77774476,4139.6
+Niagara,82,64,2011 data not available,313,312,19.53632815,5347.625
+Dufferin Grove,83,42,2011 data not available,141,94,16.21458922,3287.2
+Little Portugal,84,22,2011 data not available,102,122,17.38358577,6815.5
+South Parkdale,85,40,2011 data not available,152,110,24.80493413,6156.444444
+Roncesvalles,86,41,2011 data not available,90,139,19.20689115,4172
+High Park-Swansea,87,77,2011 data not available,125,291,47.64471023,4831.9
+High Park North,88,61,2011 data not available,87,145,23.63400611,2299.333333
+Runnymede-Bloor West Village,89,55,2011 data not available,56,102,19.86655409,2667.5
+Junction Area,90,93,2011 data not available,164,146,26.82264851,5993.6
+Weston-Pellam Park,91,32,2011 data not available,62,104,16.90758145,2896.8
+Corso Italia-Davenport,92,73,2011 data not available,78,124,22.3904709,3832.833333
+Dovercourt-Wallace Emerson-Juncti,93,137,2011 data not available,204,286,47.68163149,3898.416667
+Wychwood,94,62,2011 data not available,74,75,22.11651935,3112.5
+Annex,95,120,2011 data not available,290,331,39.47685229,5810.5
+Casa Loma,96,45,2011 data not available,74,116,22.99642277,3815.5
+Yonge-St.Clair,97,28,2011 data not available,58,99,12.83543094,7116
+Rosedale-Moore Park,98,91,2011 data not available,148,305,48.24002744,3646.62069
+Mount Pleasant East,99,58,2011 data not available,83,218,28.31337044,5380.714286
+Yonge-Eglinton,100,67,2011 data not available,134,143,22.07398574,5391
+Forest Hill South,101,28,2011 data not available,42,164,30.25289175,5855
+Forest Hill North,102,53,2011 data not available,61,153,20.41502948,5872.555556
+Lawrence Park South,103,39,2011 data not available,69,183,39.90787305,4398.111111
+Mount Pleasant West,104,45,2011 data not available,111,228,16.12560861,5827.571429
+Lawrence Park North,105,55,2011 data not available,46,218,29.60219911,4704.142857
+Humewood-Cedarvale,106,29,2011 data not available,51,88,23.21263491,3941
+Oakwood Village,107,40,2011 data not available,84,178,32.5587855,4503.666667
+Briar Hill-Belgravia,108,45,2011 data not available,93,137,22.4839455,11837.28571
+Caledonia-Fairbank,109,37,2011 data not available,52,82,18.70522556,5796
+Keelesdale-Eglinton West,110,24,2011 data not available,119,141,22.30262457,2186.666667
+Rockcliffe-Smythe,111,104,2011 data not available,115,193,43.05565102,5589.25
+Beechborough-Greenbrook,112,35,2011 data not available,63,103,16.39852965,5102
+Weston,113,75,2011 data not available,178,196,29.13558051,4369.25
+Lambton Baby Point,114,28,2011 data not available,20,52,19.21811928,2337.857143
+Mount Dennis,115,59,2011 data not available,59,64,17.69051031,13491.5
+Steeles,116,80,2011 data not available,99,234,46.33675666,3711.3125
+L'Amoreaux,117,138,2011 data not available,249,215,66.57614957,2482.52381
+Tam O'Shanter-Sullivan,118,55,2011 data not available,260,171,50.85001538,2522.181818
+Wexford/Maryvale,119,182,2011 data not available,607,262,86.67723451,3539.25
+Clairlea-Birchmount,120,129,2011 data not available,465,268,63.8376636,3601
+Oakridge,121,56,2011 data not available,80,76,19.11891564,3205
+Birchcliffe-Cliffside,122,104,2011 data not available,114,193,64.45457811,2636.263158
+Cliffcrest,123,69,2011 data not available,97,108,51.38712788,3779.625
+Kennedy Park,124,73,2011 data not available,155,117,30.81869749,2876.75
+Ionview,125,22,2011 data not available,111,32,16.898618,2664
+Dorset Park,126,93,2011 data not available,348,251,39.00312698,3959
+Bendale,127,118,2011 data not available,851,258,62.86449729,4499.117647
+Agincourt South-Malvern West,128,125,2011 data not available,281,160,55.9797809,3773.071429
+Agincourt North,129,94,2011 data not available,129,288,57.45648472,3584.058824
+Milliken,130,160,2011 data not available,487,426,67.435866,3917.571429
+Rouge,131,199,2011 data not available,263,770,115.7449367,4300.913043
+Malvern,132,180,2011 data not available,232,334,74.91197001,3766.772727
+Centennial Scarborough,133,44,2011 data not available,44,115,45.86598925,2994.571429
+Highland Creek,134,70,2011 data not available,50,100,37.845626,3516.833333
+Morningside,135,35,2011 data not available,118,88,32.28313942,4873.142857
+West Hill,136,80,2011 data not available,209,166,61.14700126,3824.181818
+Woburn,137,139,2011 data not available,507,438,102.835355,4656.6
+Eglinton East,138,61,2011 data not available,180,122,29.46464034,3086
+Scarborough Village,139,29,2011 data not available,110,65,23.14334537,2111.6
+Guildwood,140,29,2011 data not available,23,56,31.41879421,2114.875
