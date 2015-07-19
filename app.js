@@ -7,29 +7,31 @@ var app = express();
 var bodyParser = require('body-parser')
 var parser = require('./parser/parseHandler');
 var safety, economic, transportation;
-var jsonData;
-    var returnValue = {
-        neighbourhood:"", 
-        neighbourhood_id: "",
-        arsons: "",
-        assaults: "",
-        break_enter: "",
-        drug_arrest: "", 
-        hazardous_incidents: "",
-        murders: "", 
-        robberies: "",
-        sexual_assaults: "",
-        thefts: "",
-        vechile_thefts: "",
-        total_crime: "",
-        ttc_stops: "",
-        other_collision: "",
-        traffic_collision: "",
-        businesses: "",
-        child_care_space: "",
-        home_prices: "",
-        local_employment: ""
-    }
+var db = {};
+
+var returnValue = {
+    neighbourhood:"", 
+    neighbourhood_id: "",
+    arsons: "",
+    assaults: "",
+    break_enter: "",
+    drug_arrest: "", 
+    hazardous_incidents: "",
+    murders: "", 
+    robberies: "",
+    sexual_assaults: "",
+    thefts: "",
+    vechile_thefts: "",
+    total_crime: "",
+    ttc_stops: "",
+    other_collision: "",
+    traffic_collision: "",
+    businesses: "",
+    child_care_space: "",
+    home_prices: "",
+    local_employment: ""
+}
+
 app.set('port', (process.env.PORT || 5000));
 
 parser(function(err, data){
@@ -62,10 +64,8 @@ app.post('/', function (req, res) {
     });
     
     setReturn(neighbourhood_id);
-
     res.status(200).send(returnValue);
 });
-
 
 //this function modifies the return values lol dkm smh
 function setReturn(neighbourhoodID){
@@ -90,4 +90,26 @@ function setReturn(neighbourhoodID){
     returnValue.home_prices= economic.home_prices[neighbourhoodID];
     returnValue.local_employment= economic.local_employment[neighbourhoodID];
 }
+
+app.post('/inbound', function(req, res) {
+
+    res.end();
+
+    if (!req.body.envelope || !req.body.subject) {
+        console.log('bad request');
+        return;
+    }
+
+    var from = JSON.parse(req.body.envelope).from;
+    var subject = req.body.subject.toLowerCase();
+
+    if (db[from]) {
+        return;
+    }
+
+    db[from] = true;
+
+    console.log(subject);
+    console.log(count+1);
+});
 
