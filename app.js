@@ -5,7 +5,6 @@ var fs = require('fs');
 var app = express();
 
 var bodyParser = require('body-parser')
-var firstTime = true;
 var parser = require('./parser/parseHandler');
 var safety, economic, transportation;
 var jsonData;
@@ -33,6 +32,17 @@ var jsonData;
     }
 app.set('port', (process.env.PORT || 5000));
 
+parser(function(err, data){
+    if (err){
+        console.log(err);
+    } else {
+        //populate variable array with the parsed data from given back from parse.js
+        safety = data[0];
+        economic = data[1];
+        transportation = data[2];
+    }
+});
+
 var server = app.listen(app.get("port"), function () {
     var host = server.address().address;
     var port = server.address().port;
@@ -50,28 +60,9 @@ app.post('/', function (req, res) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
     });
-    if (firstTime){
-    	parser(function(err, data){
-    		if (err){
-    			console.log(err);
-    		}
-    		else {
-                //populate variable array with the parsed data from given back from parse.js
-    			safety = data[0];
-    			economic = data[1];
-    			transportation = data[2];
-    			setReturn(neighbourhood_id);
-                firstTime = false;
-    		}
-    		
-    	});
-    }
-    else {
-    	//This is not the first time so you use local variables
-        //at this point neighbourhoodID should hopefully be changed lol dkm smh
-        setReturn(neighbourhood_id);
-        
-    }
+    
+    setReturn(neighbourhood_id);
+
     res.status(200).send(returnValue);
 });
 
