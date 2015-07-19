@@ -5,6 +5,7 @@ var fs = require('fs');
 var multer = require('multer');
 var Pusher = require('pusher');
 var escapeHTML = require('escape-html');
+var twilio = require('twilio');
 var app = express();
 
 var bodyParser = require('body-parser')
@@ -204,10 +205,16 @@ function crimeplusplus (neighbourhoodName, body){
             }
     }
 
-    /*
-    pusher.trigger('notifications', 'new_notification', {
-        message: "crime++"
-    });*/
+
+app.use(bodyparser.urlencoded());
+app.post('/sms', twilio.webhook({
+        validate:false
+    }), function(req, res) {
+        console.log(req.body.Body);
+        var smsBody = req.body.Body.split(/\r\n|\r|\n/g);
+        crimeplusplus(smsBody[0], smsBody[1]);
+});
+
 
     
     pusher.trigger('notifications', 'new_notification', {

@@ -15,7 +15,8 @@
     "express": "^4.13.0",
     "multer": "^0.1.8",
     "pusher": "^1.0.6",
-    "sendgrid": "^1.9.0"
+    "sendgrid": "^1.9.0",
+    "twilio": "^2.2.1"
   },
   "engines": {
     "node": "0.12.5"
