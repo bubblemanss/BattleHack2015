@@ -14,7 +14,6 @@
 					array.push(data);
 					//wait until all csv files have been processed
 					if (array.length == strData.length) {
-                        console.log(array);
 						callback(err, array);
 					}
 				}		

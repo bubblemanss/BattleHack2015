@@ -61,7 +61,6 @@ app.post('/', function (req, res) {
     			safety = data[0];
     			economic = data[1];
     			transportation = data[2];
-                console.log(safety);
     			setReturn(neighbourhood_id);
     			firstTime = false;
     			res.status(200).send(returnValue);
@@ -71,7 +70,6 @@ app.post('/', function (req, res) {
     }
     else {
     	//This is not the first time so you use local variables
-    	console.log("safety");
         //at this point neighbourhoodID should hopefully be changed lol dkm smh
         setReturn(neighbourhood_id);
         res.status(200).send(returnValue);
