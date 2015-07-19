@@ -152,14 +152,6 @@ function serverLookup(hoodId, event) {
     );
 }
 
-function sendNotification(){
-    // POST to our server
-    $.post('/notification', {message: 'text'}).success(function(){
-        console.log('Notification sent!');
-    });
-};
-
-
 /*
 
 function serverLookup(event){

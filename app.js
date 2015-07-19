@@ -113,7 +113,7 @@ app.post('/inbound', function(req, res) {
     //     return;
     // }
 
-    // var from = JSON.parse(req.body.envelope).from;
+    console.log(JSON.parse(req.body.envelope));
     // var subject = req.body.subject.toLowerCase();
 
     // if (db[from]) {
@@ -124,7 +124,7 @@ app.post('/inbound', function(req, res) {
     subject = req.body.subject;
     var emailSubject = subject.match(/Security|Transportation|Economic/i);
     if (emailSubject!=null){//Subject matches wanted form
-        var emailBody = req.body.mainbody;
+        var emailBody = req.body.envelope;
         emailBody = emailBody.split("\n");
         if (emailBody.length > 0 ){
             console.log("Neighbourhood: " + emailBody[0]);
@@ -211,11 +211,3 @@ function crimeplusplus (neighbourhoodName, body){
         message: body.replace(/\s+/g, '') + " occurred in " + neighbourhoodName.replace(/\s+/g, '')
     });
 }
-
-app.post('/notification', function(req, res) {
-    var message = escapeHTML(req.param('message'));
-    pusher.trigger('notifications', 'new_notification', {
-        message: "crime++"
-    });
-    res.send("Notification triggered!");
-});
