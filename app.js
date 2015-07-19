@@ -106,41 +106,111 @@ function setReturn(neighbourhoodID){
 }
 
 app.post('/inbound', function(req, res) {
-
     res.end();
 
-    if (!req.body.envelope || !req.body.subject) {
-        console.log('bad request');
-        return;
+    // if (!req.body.envelope || !req.body.subject) {
+    //     console.log('bad request');
+    //     return;
+    // }
+
+    // var from = JSON.parse(req.body.envelope).from;
+    // var subject = req.body.subject.toLowerCase();
+
+    // if (db[from]) {
+    //     return;
+    // }
+
+    // db[from] = true;
+    subject = req.body.subject;
+    var emailSubject = subject.match(/Security|Transportation|Economic/i);
+    if (emailSubject!=null){//Subject matches wanted form
+        var emailBody = req.body.mainbody;
+        emailBody = emailBody.split("\n");
+        if (emailBody.length > 0 ){
+            console.log("Neighbourhood: " + emailBody[0]);
+            var emailBodyTwo = emailBody[1];
+            if (emailBodyTwo.match(/collision|arson|assault|break|drug|murder|robber|theft/i)!=null){
+                console.log("Increase in :" + emailBodyTwo);
+                crimeplusplus(emailBody[0], emailBodyTwo);
+            }
+        }
     }
 
-    var from = JSON.parse(req.body.envelope).from;
-    var subject = req.body.subject.toLowerCase();
+});
 
-    if (db[from]) {
-        return;
+function crimeplusplus (neighbourhoodName, body){
+    console.log("FUCKK");
+
+    // There's always only 140 ids
+    for (var i = 1; i < 141 ; i++){
+
+        if (safety.neighbourhood[i].toLowerCase() == neighbourhoodName.toLowerCase().replace(/\s+/g, '')){
+            var crime = parseInt(safety.total_crime[i]);
+            crime ++;
+                if (body.toLowerCase().replace(/\s+/g, '') == "collision") {
+                    var add = parseInt(transportation.traffic_collision[i]);
+                    add++;
+                    transportation.traffic_collision[i] = add;
+                    crime--;
+                    console.log(add);
+                }
+                else if (body.toLowerCase().replace(/\s+/g, '') == "break") {
+                    var add = parseInt(safety.break_enter[i]);
+                    add++;
+                    safety.break_enter[i] = add;
+                    console.log(add);
+                }
+                else if (body.toLowerCase().replace(/\s+/g, '') == "drug") {
+                    var add = parseInt(safety.drug_arrest[i]);
+                    add++;
+                    safety.drug_arrest[i] = add;
+                    console.log(add);
+                }
+                else if (body.toLowerCase().replace(/\s+/g, '') == "arson") {
+                    var add = parseInt(safety.arsons[i]);
+                    add++;
+                    safety.arsons[i].arsons = add;
+                    console.log(add);
+                }
+                else if (body.toLowerCase().replace(/\s+/g, '') == "assault") {
+                    var add = parseInt(safety.assaults[i]);
+                    add++;
+                    safety.assaults[i] = add;
+                    console.log(add);
+                }
+                else if (body.toLowerCase().replace(/\s+/g, '') == "murder") {
+                    var add = parseInt(safety.murders[i]);
+                    add++;
+                    safety.murders[i] = add;
+                    console.log(add);
+                }
+                else if (body.toLowerCase().replace(/\s+/g, '') == "theft") {
+                    var add = parseInt(safety.thefts[i]);
+                    add++;
+                    safety.thefts[i] = add;
+                    console.log(add);
+                }
+                else if (body.toLowerCase().replace(/\s+/g, '') == "robber") {
+                    var add = parseInt(safety.robberies[i]);
+                    add++;
+                    safety.robberies[i] = add;
+                    console.log(add);
+                }
+
+                safety.total_crime[i] = crime;
+            }
     }
-
-    db[from] = true;
-
-    // Notifications
-    var message = escapeHTML(req.param('message'));
-    pusher.trigger('notifications', 'new_notification', {
-        message: "crime++"
-    });
 
     /*
     pusher.trigger('notifications', 'new_notification', {
-        message: event + " occurred in " + neighbourhood
+        message: "crime++"
+    });*/
+
+    
+    pusher.trigger('notifications', 'new_notification', {
+        message: body.replace(/\s+/g, '') + " occurred in " + neighbourhoodName.replace(/\s+/g, '')
     });
-    */
-
-
-    res.send("Notification triggered!");
-
-    console.log(subject);
-    console.log(count+1);
-});
+}
 
 app.post('/notification', function(req, res) {
     var message = escapeHTML(req.param('message'));
