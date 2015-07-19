@@ -2,6 +2,7 @@
 var http = require("http");
 var express = require("express");
 var fs = require('fs');
+var multer = require('multer');
 var app = express();
 
 var bodyParser = require('body-parser')
@@ -53,6 +54,7 @@ var server = app.listen(app.get("port"), function () {
 });
 
 app.use(express.static(__dirname + '/public'));
+app.use(multer());
 app.use(bodyParser.json());
 
 app.post('/', function (req, res) {
