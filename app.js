@@ -114,6 +114,7 @@ app.post('/inbound', function(req, res) {
     // }
 
     console.log(JSON.parse(req.body.envelope));
+    console.log(req.body);
     // var subject = req.body.subject.toLowerCase();
 
     // if (db[from]) {

@@ -123,7 +123,6 @@ function serverLookup(hoodId, event) {
         contentType: "application/json"
     }).done(
         function(data){
-            sendNotification();
             detailData = data;
             var location = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
             detailLocation = location;
