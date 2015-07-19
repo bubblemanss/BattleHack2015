@@ -69,6 +69,7 @@ var server = app.listen(app.get("port"), function () {
 app.use(express.static(__dirname + '/public'));
 app.use(multer());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 app.post('/', function (req, res) {
     console.log(req.body);
@@ -204,9 +205,11 @@ function crimeplusplus (neighbourhoodName, body){
                 safety.total_crime[i] = crime;
             }
     }
+    pusher.trigger('notifications', 'new_notification', {
+        message: body.replace(/\s+/g, '') + " occurred in " + neighbourhoodName.replace(/\s+/g, '')
+    });
+}
 
-
-app.use(bodyparser.urlencoded());
 app.post('/sms', twilio.webhook({
         validate:false
     }), function(req, res) {
@@ -214,10 +217,3 @@ app.post('/sms', twilio.webhook({
         var smsBody = req.body.Body.split(/\r\n|\r|\n/g);
         crimeplusplus(smsBody[0], smsBody[1]);
 });
-
-
-    
-    pusher.trigger('notifications', 'new_notification', {
-        message: body.replace(/\s+/g, '') + " occurred in " + neighbourhoodName.replace(/\s+/g, '')
-    });
-}
