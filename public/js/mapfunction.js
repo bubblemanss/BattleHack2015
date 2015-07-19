@@ -2,6 +2,7 @@ var map;
 var pos;
 var markers = [];
 var infowindow = new google.maps.InfoWindow();
+var previousFeature = 0;
 
 function initialize() {
     var mapOptions = {
@@ -12,6 +13,7 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
     map.data.loadGeoJson("simple.geojson");
+    console.log(map.data);
     map.data.setStyle(function(feature) {
         var color = 'gray';
         if (feature.getProperty('isColorful')) {
@@ -26,12 +28,13 @@ function initialize() {
 
     map.data.addListener('click', function(event) {
         var location = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
-
+        var hoodNum = event.feature.getProperty("HOODNUM");
+        var hoodName = event.feature.getProperty("HOOD");
         infowindow.close();
         infowindow = new google.maps.InfoWindow({
             map: map,
             position: location,
-            content: "TEST"
+            content: hoodName + ": " + hoodNum
         });
         infowindow.open(map);
 
@@ -42,12 +45,6 @@ function initialize() {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            var marker = new google.maps.Marker({
-                position: pos,
-                map: map
-            });
-            markers.push(marker);
-
             map.setCenter(pos);
         },function () {
             handleNoGeolocation(true);
@@ -57,20 +54,6 @@ function initialize() {
         // Browser doesn't support Geolocation
         handleNoGeolocation(false);
     }
-}
-
-function displayInfoWindow(event) {
-    if (event.feature == undefined) return;
-    //var infowindow = {};
-    console.log("Display info window");
-    var lat = event.latLng;
-    var location = new google.maps.LatLng(lat);
-
-    infowindow.map = map;
-    infowindow.position = position;
-    infowindow.content = "Test";
-    infowindow.open(map);
-    event.feature.setProperty('isColorful', true);
 }
 
 /*
