@@ -3,43 +3,36 @@ var pos;
 var markers = [];
 var infowindow = new google.maps.InfoWindow();
 var previousFeature = 0;
+var hoodColor = 'gray';
 
 function initialize() {
     var mapOptions = {
         scaleControl: true,
         streetViewControl: false,
-        zoom: 16
+        zoom: 12
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
     map.data.loadGeoJson("simple.geojson");
     console.log(map.data);
     map.data.setStyle(function(feature) {
-        var color = 'gray';
         if (feature.getProperty('isColorful')) {
-          color = feature.getProperty('color');
+            return /** @type {google.maps.Data.StyleOptions} */({
+                fillColor: hoodColor,
+                strokeColor: 'gray',
+                strokeWeight: 2
+            });
+        } else {
+            return /** @type {google.maps.Data.StyleOptions} */({
+                fillColor: 'gray',
+                strokeColor: 'gray'
+            });
         }
-        return /** @type {google.maps.Data.StyleOptions} */({
-          fillColor: color,
-          strokeColor: color,
-          strokeWeight: 2
-        });
     });
 
     map.data.addListener('click', function(event) {
-        var location = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
         var hoodNum = event.feature.getProperty("HOODNUM");
-        var hoodName = event.feature.getProperty("HOOD");
-        serverLookup(hoodNum);
-        infowindow.close();
-        infowindow = new google.maps.InfoWindow({
-            map: map,
-            position: location,
-            content: hoodName + ": " + hoodNum
-        });
-        infowindow.open(map);
-
-        event.feature.setProperty('isColorful', true);
+        serverLookup(hoodNum, event);
     });
 
     // Try HTML5 geolocation
@@ -47,7 +40,7 @@ function initialize() {
         navigator.geolocation.getCurrentPosition(function (position) {
             pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             map.setCenter(pos);
-        },function () {
+        }, function () {
             handleNoGeolocation(true);
         });
     }
@@ -57,7 +50,14 @@ function initialize() {
     }
 }
 
-function serverLookup(hoodId) {
+function generateContent(data) {
+    content = data.neighbourhood + "<br/>"
+            + "Annual crimes: " + data.total_crime + "<br/>"
+            + "Home prices: $" + data.home_prices;
+    return content;
+}
+
+function serverLookup(hoodId, event) {
     var url;
     if(document.location.hostname == "mmk.herokuapp.com") {
         url = "http://mmk.herokuapp.com";
@@ -65,7 +65,7 @@ function serverLookup(hoodId) {
         url = "http://localhost:5000";
     }
 
-    var data = {HoodId: hoodId};
+    var data = { HoodId: hoodId };
 
     console.log(JSON.stringify(data));
 
@@ -77,8 +77,21 @@ function serverLookup(hoodId) {
         contentType: "application/json"
     }).done(
         function(data){
-            console.log("I did it!");
+            var location = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
             console.log(data);
+            hoodColor = (data.total_crime < 300) ? 'green' : (data.total_crime < 700) ? 'yellow' : 'red';
+            if (previousFeature != 0) {
+                previousFeature.setProperty('isColorful', false);
+            }
+            previousFeature = event.feature;
+            event.feature.setProperty('isColorful', true);
+            infowindow.close();
+            infowindow = new google.maps.InfoWindow({
+                map: map,
+                position: location,
+                content: generateContent(data)
+            });
+            infowindow.open(map);
         }
     ).fail(
         function(data){
