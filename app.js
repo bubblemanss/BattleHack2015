@@ -9,30 +9,28 @@ var firstTime = true;
 var parser = require('./parser/parseHandler');
 var safety, economic, transportation;
 var jsonData;
-
-var returnValue = {
-    neighbourhood:"", 
-    neighbourhood_id: "",
-    arsons: "",
-    assaults: "",
-    break_enter: "",
-    drug_arrest: "", 
-    hazardous_incidents: "",
-    murders: "", 
-    robberies: "",
-    sexual_assaults: "",
-    thefts: "",
-    vechile_thefts: "",
-    total_crime: "",
-    ttc_stops: "",
-    other_collision: "",
-    traffic_collision: "",
-    businesses: "",
-    child_care_space: "",
-    home_prices: "",
-    local_employment: ""
-}
-
+    var returnValue = {
+        neighbourhood:"", 
+        neighbourhood_id: "",
+        arsons: "",
+        assaults: "",
+        break_enter: "",
+        drug_arrest: "", 
+        hazardous_incidents: "",
+        murders: "", 
+        robberies: "",
+        sexual_assaults: "",
+        thefts: "",
+        vechile_thefts: "",
+        total_crime: "",
+        ttc_stops: "",
+        other_collision: "",
+        traffic_collision: "",
+        businesses: "",
+        child_care_space: "",
+        home_prices: "",
+        local_employment: ""
+    }
 app.set('port', (process.env.PORT || 5000));
 
 var server = app.listen(app.get("port"), function () {
@@ -46,6 +44,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
 app.post('/', function (req, res) {
+    console.log(req.body);
     var neighbourhood_id = req.body.HoodId;
     res.set({
         "Content-Type": "application/json",
@@ -62,8 +61,7 @@ app.post('/', function (req, res) {
     			economic = data[1];
     			transportation = data[2];
     			setReturn(neighbourhood_id);
-    			firstTime = false;
-    			res.status(200).send(returnValue);
+                firstTime = false;
     		}
     		
     	});
@@ -72,9 +70,9 @@ app.post('/', function (req, res) {
     	//This is not the first time so you use local variables
         //at this point neighbourhoodID should hopefully be changed lol dkm smh
         setReturn(neighbourhood_id);
-        res.status(200).send(returnValue);
-}
-
+        
+    }
+    res.status(200).send(returnValue);
 });
 
 
@@ -83,7 +81,7 @@ function setReturn(neighbourhoodID){
 	returnValue.neighbourhood = safety.neighbourhood[neighbourhoodID];
 	returnValue.neighbourhood_id= safety.neighbourhood_id[neighbourhoodID];
 	returnValue.arsons= safety.arsons[neighbourhoodID];
-    returnValue.assaults= safety.assaults[neighbourhoodID],
+    returnValue.assaults= safety.assaults[neighbourhoodID];
     returnValue.break_enter= safety.break_enter[neighbourhoodID];
     returnValue.drug_arrest= safety.drug_arrest[neighbourhoodID]; 
     returnValue.hazardous_incidents= safety.hazardous_incidents[neighbourhoodID];

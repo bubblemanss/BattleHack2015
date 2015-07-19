@@ -18,6 +18,7 @@ module.exports = function(callback){
 		setSafety(array[0]);
 		setEconomics(array[1]);
 		setTranportation(array[2]);
+
 		//Wait for all information to be loaded
 		while (true){
 			if (objArray.length == 3) {
@@ -31,7 +32,7 @@ module.exports = function(callback){
 //Format csv files and pushes onto the response array
 function setSafety(data){
 	objArray.push(safety_parse(data));
-	///console.log(safety_parse(data));
+	//console.log(safety_parse(data));
 }
 function setEconomics(data){
 	objArray.push(economic_parse(data));
