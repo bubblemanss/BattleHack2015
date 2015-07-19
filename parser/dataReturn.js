@@ -1,7 +1,7 @@
 var array = [];  
 var parser = require('./parseHandler');
 var safety, economic, transportation;
-var neighbourhoodID=1;
+var neighbourhoodID;
 
 module.exports = function(id, callback){
 	parser(function(err, data){

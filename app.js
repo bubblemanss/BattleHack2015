@@ -61,7 +61,7 @@ app.post('/', function (req, res) {
     			safety = data[0];
     			economic = data[1];
     			transportation = data[2];
-    			console.log("safety");
+                console.log(safety);
     			setReturn(neighbourhood_id);
     			firstTime = false;
     			res.status(200).send(returnValue);
