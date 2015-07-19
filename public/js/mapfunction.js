@@ -3,7 +3,7 @@ var pos;
 var markers = [];
 var infowindow = new google.maps.InfoWindow();
 var previousFeature = 0;
-var hoodColor = 'gray';
+var hoodColor = 'blue';
 var detailData, detailLocation;
 
 function initialize() {
@@ -20,13 +20,13 @@ function initialize() {
         if (feature.getProperty('isColorful')) {
             return /** @type {google.maps.Data.StyleOptions} */({
                 fillColor: hoodColor,
-                strokeColor: 'gray',
+                strokeColor: 'blue',
                 strokeWeight: 2
             });
         } else {
             return /** @type {google.maps.Data.StyleOptions} */({
-                fillColor: 'gray',
-                strokeColor: 'gray'
+                fillColor: 'blue',
+                strokeColor: 'blue'
             });
         }
     });
@@ -123,6 +123,7 @@ function serverLookup(hoodId, event) {
         contentType: "application/json"
     }).done(
         function(data){
+            sendNotification();
             detailData = data;
             var location = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
             detailLocation = location;
@@ -150,6 +151,14 @@ function serverLookup(hoodId, event) {
         }
     );
 }
+
+function sendNotification(){
+    // POST to our server
+    $.post('/notification', {message: 'text'}).success(function(){
+        console.log('Notification sent!');
+    });
+};
+
 
 /*
 

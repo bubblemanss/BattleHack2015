@@ -3,12 +3,24 @@ var http = require("http");
 var express = require("express");
 var fs = require('fs');
 var multer = require('multer');
+var Pusher = require('pusher');
+var escapeHTML = require('escape-html');
 var app = express();
 
 var bodyParser = require('body-parser')
 var parser = require('./parser/parseHandler');
 var safety, economic, transportation;
 var db = {};
+
+var pusher = new Pusher({
+   appId: '130754',
+   key: '3e19eae4407129f62cdb',
+   secret: '7199c2c544a3614f56c2'
+});
+
+pusher.trigger('my_channel', 'my_event', {
+   message: "hello world"
+});
 
 var returnValue = {
     neighbourhood:"", 
@@ -111,7 +123,29 @@ app.post('/inbound', function(req, res) {
 
     db[from] = true;
 
+    // Notifications
+    var message = escapeHTML(req.param('message'));
+    pusher.trigger('notifications', 'new_notification', {
+        message: "crime++"
+    });
+
+    /*
+    pusher.trigger('notifications', 'new_notification', {
+        message: event + " occurred in " + neighbourhood
+    });
+    */
+
+
+    res.send("Notification triggered!");
+
     console.log(subject);
     console.log(count+1);
 });
 
+app.post('/notification', function(req, res) {
+    var message = escapeHTML(req.param('message'));
+    pusher.trigger('notifications', 'new_notification', {
+        message: "crime++"
+    });
+    res.send("Notification triggered!");
+});

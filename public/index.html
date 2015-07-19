@@ -19,9 +19,14 @@
         body { height: 100%; margin: 0; padding-top: 50px; }
         #map-canvas { height: 100% }
     </style>
-
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC9jELgT87kM3oGDIL0Cy3nUIJazRRroA"></script>
     <script type="text/javascript" src="js/mapfunction.js"></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <!-- Bootstrap -->
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -46,9 +51,21 @@
     </div>
       </nav>
         <div id="map-canvas" style="width: 100%; height: 100%"></div>
+    <!-- <script src="//code.jquery.com/jquery-2.1.3.min.js"></script> -->
+    <script src="//js.pusher.com/2.2/pusher.min.js"></script>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript">
+        var pusher = new Pusher('3e19eae4407129f62cdb');
+
+        var notificationsChannel = pusher.subscribe('notifications');
+
+        notificationsChannel.bind('new_notification', function(notification){
+            var message = notification.message;
+            console.log(message);
+            toastr.info(message);
+        });
+
+    </script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
