@@ -125,8 +125,10 @@ app.post('/inbound', function(req, res) {
     subject = req.body.subject;
     var emailSubject = subject.match(/Security|Transportation|Economic/i);
     if (emailSubject!=null){//Subject matches wanted form
-        var emailBody = req.body.envelope;
-        emailBody = emailBody.split("\n");
+        var emailBody = req.body.text;
+        
+        emailBody = emailBody.split(/\r\n|\r|\n/g);
+        //emailBody = emailBody.split("\r\n");
         if (emailBody.length > 0 ){
             console.log("Neighbourhood: " + emailBody[0]);
             var emailBodyTwo = emailBody[1];
