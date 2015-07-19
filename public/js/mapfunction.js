@@ -58,7 +58,13 @@ function initialize() {
 }
 
 function serverLookup(hoodId) {
-    var url = "http://localhost:5000";
+    var url;
+    if(document.location.hostname == "uwstudygroup.herokuapp.com") {
+        url = "http://uwstudygroup.herokuapp.com";
+    } else {
+        url = "http://localhost:5000";
+    }
+
     var data = {HoodId: hoodId};
 
     console.log(JSON.stringify(data));
