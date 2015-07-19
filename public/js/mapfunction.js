@@ -30,6 +30,7 @@ function initialize() {
         var location = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
         var hoodNum = event.feature.getProperty("HOODNUM");
         var hoodName = event.feature.getProperty("HOOD");
+        serverLookup(hoodNum);
         infowindow.close();
         infowindow = new google.maps.InfoWindow({
             map: map,
@@ -54,6 +55,33 @@ function initialize() {
         // Browser doesn't support Geolocation
         handleNoGeolocation(false);
     }
+}
+
+function serverLookup(hoodId) {
+    var url = "http://localhost:5000";
+    var data = {HoodId: hoodId};
+
+    console.log(JSON.stringify(data));
+
+    jQuery.ajax({
+        type: "POST",
+        url: url,
+        data: JSON.stringify(data),
+        dataType: "json",
+        contentType: "application/json"
+    }).done(
+        function(data){
+            console.log("I did it!");
+            console.log(data);
+        }
+    ).fail(
+        function(data){
+            console.log('err');
+            console.log(JSON.stringify(data));
+            console.log(data.status);
+            console.log(data.statusMessage);
+        }
+    );
 }
 
 /*

@@ -5,6 +5,8 @@ var fs = require('fs');
 var app = express();
 var dataGrab = require("./parser/dataReturn")
 var jsonData, neighbourhood_id = 2;
+var bodyParser = require('body-parser')
+
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -20,22 +22,26 @@ var server = app.listen(app.get("port"), function () {
 });
 
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
 
 app.post('/', function (req, res) {
-	res.set({
-	    "Content-Type": "application/json",
-	    "Access-Control-Allow-Origin": "*"
-		});
+    var neighbourhood_id = req.body.HoodId;
+    res.set({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin" : '*',
+        "Access-Control-Expose-Headers": "http://127.0.0.1:9000",
+        "Content-Language":"utf-8"
+    });
 
-	dataGrab(neighbourhood_id, function(err, data){
-		if (err){
-			console.log(err);
-		}
-		else {
-			jsonData = data;
-			console.log(jsonData);
-			res.status(200).send(jsonData);
-		}
-	});
-
+    dataGrab(neighbourhood_id, function(err, data) {
+        console.log("Grabbing data");
+        if (err){
+            console.log(err);
+        } else {
+            jsonData = data;
+            console.log(jsonData);
+            res.status(200).send(jsonData);
+        }
+    });
+    res.status(200).send(jsonData)
 });
